@@ -1,6 +1,10 @@
-const button = document.getElementById("search-button")
+const button = document.getElementById("search-button");
 
 button.addEventListener("click", function() {
-fetch("superheroes.php").then(response => response.text()).then(data=> { alert(data);
+const query = document.getElementById("search-input").value;
+
+fetch("superheroes.php?query=" + encodeURIComponent(query)).then(response => response.text()).then(data=> { document.getElementById("result").innerHTML = data; 
+
+
 });
 });

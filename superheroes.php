@@ -1,4 +1,6 @@
 <?php
+$query = $_GET['query'] ?? '';
+$query = strtolower(trim($query));
 
 $superheroes = [
   [
@@ -63,10 +65,26 @@ $superheroes = [
   ], 
 ];
 
-?>
 
-<ul>
-<?php foreach ($superheroes as $superhero): ?>
-  <li><?= $superhero['alias']; ?></li>
-<?php endforeach; ?>
-</ul>
+if ($query == ''){
+    foreach($superheroes as $superhero){
+        echo $superhero ['alias']."<br>";   
+}
+
+}else{
+    $found = false;
+    foreach ($superheroes as $superhero){
+        if(stripos($superhero['name'],$query)!== false || stripos ($superhero['alias'],$query)!==false){
+            $found = true;
+            echo "<h3>" . htmlspecialchars($superhero['alias']) . "</h3>";
+        echo "<h4>" . htmlspecialchar($superhero['name']) . "</h4>";
+    echo "<p>" . htmlspecialchar($superhero ['biography']) . "</p>";
+      }
+    }
+if ($found == false){
+    echo "Superhero not found";
+}
+}
+
+
+?>
